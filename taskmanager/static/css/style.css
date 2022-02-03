@@ -7,3 +7,11 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.card {
+    border-radius: 2%;
+}
+
+.btn-large {
+    margin-bottom: 10px;
+}

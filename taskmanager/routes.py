@@ -4,7 +4,8 @@ from taskmanager.models import Category, Task
 
 
 @app.route("/")
-def home():
+def home()
+    
     return render_template("tasks.html")
 
 
@@ -49,7 +50,7 @@ def add_task():
         task = Task(
             task_name=request.form.get("task_name"),
             task_description=request.form.get("task_description"),
-            is_urgent=bool(true if request.form.get("is_urgent") else False),
+            is_urgent=bool(True if request.form.get("is_urgent") else False),
             due_date=request.form.get("due_date"),
             category_id=request.form.get("category_id")
     )

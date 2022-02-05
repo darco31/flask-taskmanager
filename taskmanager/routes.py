@@ -5,18 +5,27 @@ from taskmanager.models import Category, Task
 
 @app.route("/")
 def home():
+    """
+    Description
+    """
     tasks = Task.query.order_by(Task.id).all()
     return render_template("tasks.html", tasks=tasks)
 
 
 @app.route("/categoreies")
 def categories():
+    """
+    Description
+    """
     categories = list(Category.query.order_by(Category.category_name).all())
     return render_template("categories.html", categories=categories)
 
 
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
+    """
+    Description
+    """
     if request.method == "POST":
         category = Category(category_name=request.form.get("category_name"))
         db.session.add(category)
@@ -27,6 +36,9 @@ def add_category():
 
 @app.route("/edit_category/<int:category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
+    """
+    Description
+    """
     category = Category.query.get_or_404(category_id)
     if request.method == "POST":
         category.category_name = request.form.get("category_name")
@@ -37,15 +49,21 @@ def edit_category(category_id):
 
 @app.route("/delete_category/<int:category_id>")
 def delete_category(category_id):
+    """
+    Description
+    """
     category = Category.query.get_or_404(category_id)
     db.session.delete(category)
     db.session.commit()
     return redirect(url_for("categories"))
-   
+
 
 
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
+    """
+    Description
+    """
     categories = list(Category.query.order_by(Category.category_name).all())
     if request.method == "POST":
         task = Task(
@@ -63,6 +81,9 @@ def add_task():
 
 @app.route("/edit_task/<int:task_id>", methods=["GET", "POST"])
 def edit_task(task_id):
+    """
+    Description
+    """
     task = Task.query.get_or_404(task_id)
     categories = list(Category.query.order_by(Category.category_name).all())
     if request.method == "POST":
